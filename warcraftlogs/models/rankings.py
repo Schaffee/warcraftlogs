@@ -1,6 +1,6 @@
 from warcraftlogs.models.base import BaseMeta
 from warcraftlogs.models.characters import Character
-
+from warcraftlogs.models.zones import Encounter
 
 class Fight(metaclass=BaseMeta):
     pk = ('id', 'encounter', 'duration')
@@ -16,3 +16,7 @@ class Fight(metaclass=BaseMeta):
         if default is None:
             default = {}
         return Character.from_dict(data, **default)
+
+    @classmethod
+    def _get_encounter_from_dict(cls, data, default=None):
+        return Encounter(id = data.get("encounterID",default), name = data.get("encounterName",default))
