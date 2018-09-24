@@ -10,7 +10,7 @@ class BaseMeta(type):
 
         # Create some magic methods
         if '__str__' not in dct:
-            dct['__str__'] = lambda self: getattr(self, self.pk)
+            dct['__str__'] = lambda self: str([getattr(self, i) for i in self.pk])
         if '__repr__' not in dct:
             def repr_by_pk(self):
                 if isinstance(self.pk, (list, tuple)):
