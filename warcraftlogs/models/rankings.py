@@ -20,3 +20,12 @@ class Fight(metaclass=BaseMeta):
     @classmethod
     def _get_encounter_from_dict(cls, data, default=None):
         return Encounter(id = data.get("encounterID",default), name = data.get("encounterName",default))
+
+class Report(metaclass=BaseMeta):
+    pk = ('id','title')
+    id = 'id'
+    title = 'title'
+    owner = 'owner'
+    zone = 'zone'
+    startTime = 'startTime'
+    endTime = 'endTime'

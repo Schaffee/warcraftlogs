@@ -2,7 +2,7 @@ from requests import Session
 from urllib import parse
 
 from warcraftlogs.models import Zone, Class
-from warcraftlogs.models.rankings import Fight
+from warcraftlogs.models.rankings import Fight, Report
 
 
 class WarcraftLogsClient:
@@ -38,4 +38,11 @@ class WarcraftLogsClient:
         path = 'parses/character/{}/{}/{}'.format(name, server, region)
         return [Fight.from_dict(f, name=name, server=server, region=region) for f in self._get(path, **params).json()]
 
+    def reports_guild(self, guildname, servername, serverregion, **params):
+        path = 'reports/guild/{}/{}/{}'.format(guildname, servername, serverregion)
+        return [Report.from_dict(r) for r in self._get(path, **params).json()]
+
+    def reports_user(self, username, **params):
+        path = 'reports/user/{}'.format(username)
+        return [Report.from_dict(r) for r in self._get(path, **params).json()]
 
