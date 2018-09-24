@@ -33,3 +33,9 @@ class WarcraftLogsClient:
     def rankings_character(self, name, server, region, **params):
         path = 'rankings/character/{}/{}/{}'.format(name, server, region)
         return [Fight.from_dict(f, name=name, server=server, region=region) for f in self._get(path, **params).json()]
+
+    def parses(self, name, server, region, **params):
+        path = 'parses/character/{}/{}/{}'.format(name, server, region)
+        return [Fight.from_dict(f, name=name, server=server, region=region) for f in self._get(path, **params).json()]
+
+
